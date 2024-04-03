@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "sumitsaha.learn-with-sumit-theme",
+    "esbenp.prettier-vscode",
+    "pkief.material-icon-theme",
+    "dbaeumer.vscode-eslint",
+    "streetsidesoftware.code-spell-checker"
+  ],
+  "unwantedRecommendations": []
+}

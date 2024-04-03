@@ -1,0 +1,18 @@
+{
+  "name": "shell",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.test.js",
+  "type": "module",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test:php": "npx nodemon --ext php,js,py --exec php index.test.php",
+    "test:node": "npx nodemon --ext php,js,py --exec node index.test.js",
+    "test:python": "npx nodemon --ext php,js,py --exec python index.test.py"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

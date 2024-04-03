@@ -1,0 +1,23 @@
+{
+  "name": "language-connection",
+  "version": "1.0.0",
+  "description": "A small repo to connect to any programming language",
+  "main": "index.js",
+  "type": "module",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smflow/language-connection.git"
+  },
+  "author": "Maruf hossan <marufmunna800@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/smflow/language-connection/issues"
+  },
+  "homepage": "https://github.com/smflow/language-connection#readme"
+}

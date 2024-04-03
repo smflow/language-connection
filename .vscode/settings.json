@@ -1,0 +1,42 @@
+{
+  "workbench.colorTheme": "Learn with Sumit - Shades of Grey",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.layoutControl.enabled": true,
+  "workbench.tree.indent": 7,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.indentSize": "tabSize",
+  "editor.formatOnSave": true,
+  "editor.fontSize": 17,
+  "editor.fontLigatures": true,
+  "editor.fontWeight": "600",
+  "editor.fontFamily": "Cascadia Code, Consolas, 'Courier New', monospace",
+  "editor.tabSize": 2,
+  "editor.renderWhitespace": "boundary",
+  "editor.autoClosingBrackets": "languageDefined",
+  "editor.cursorBlinking": "expand",
+  "editor.cursorWidth": 2,
+  "editor.minimap.renderCharacters": false,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.mouseWheelZoom": true,
+  // prettier config
+  "prettier.tabWidth": 2,
+  "prettier.useTabs": false,
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "all",
+  "prettier.arrowParens": "always",
+  "prettier.jsxSingleQuote": false,
+  "prettier.semi": true,
+  "files.autoSave": "off",
+  "files.exclude": {
+    "**/.git": false
+  },
+  "window.commandCenter": false,
+  "cSpell.words": [
+    "Smflow"
+  ],
+  "javascript.format.semicolons": "insert",
+  "typescript.format.semicolons": "insert",
+  "[php]": {
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+  }
+}
