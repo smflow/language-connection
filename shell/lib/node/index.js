@@ -55,26 +55,23 @@ export class Connector {
 
     const cmd = (executable + "").replace("$?", `${path.join(this.#cwd, programPath)} ${token}`);
 
-    return new Promise((res, rej) => {
-      exec(cmd, (err, stdout, stderr) => {
-        // console.log({ err, stdout, stderr });
-        res(
-          err ? ({
-            data: null,
-            error: "Command execution failed."
-          }) : (this.validateRes(stdout, type) ?
-            ({
-              data: this.parseJSON(stdout)?.data || null,
-              error: null
-            }) : ({
-              error: stdout ?? stderr ?? "Invalid data sent",
-              data: null
-            })));
+    return new Promise((res, _rej) => {
+      exec(cmd, { cwd: this.#cwd }, (err, stdout, stderr) => {
+        const response = err ? ({
+          data: null,
+          error: "Command execution failed."
+        }) : (this.validateRes(stdout, type) ?
+          ({
+            data: this.parseJSON(stdout)?.data || null,
+            error: null
+          }) : ({
+            error: stdout || stderr || "Invalid data sent",
+            data: null
+          }));
+        res(response);
+        if (err?.message != null) return void console.log(err?.message);
+        else return;
 
-        if (stderr != '') return rej(stderr);
-        if (stdout != '') {
-          return this.validateRes(stdout, type) ? res(this.parseJSON(stdout).data || null) : rej("Invalid data sent");
-        };
       });
     });
   }
@@ -92,7 +89,7 @@ export class Connector {
   decodeToken(token, type) {
     const t = this.parseJSON(Buffer.from(token, "base64").toString("utf8"));
 
-    if (t.type !== type || t.token !== this.#token) return false;
+    if (t == null || t.type !== type || t.token !== this.#token) return false;
 
     return t;
   }

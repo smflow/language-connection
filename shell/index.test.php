@@ -1,9 +1,10 @@
 <?php
 
-require_once(getcwd() . "/lib/php/index.php");
+require_once implode("", [dirname(__FILE__), "/lib/php/index.php"]);
 
-$cwd = getcwd() . "/services";
-$connector = new Connector($cwd, "random-token-1209128");
+$path = implode("", [dirname(realpath(__FILE__)), "/services"]);
+
+$connector = new Connector($path, "random-token-1209128");
 
 $res = $connector->connectToService($languageTypes["PHP"], "/index.php", "form-validation", ["email" => "marufmunna800@gmail.com"], "php $?");
 

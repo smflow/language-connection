@@ -1,7 +1,5 @@
 <?php
 
-use Random\RandomException;
-
 $languageTypes = [
   "PHP" => "PHP-lang",
   "NODEJS" => "NODEJS-lang",
@@ -78,7 +76,7 @@ class Connector
           break;
       }
 
-      $cmd = str_replace("$?", path_join([$this->cwd, $programPath]) . " $token", $executable);
+      $cmd = "cd $this->cwd && " . str_replace("$?", path_join([$this->cwd, $programPath]) . " $token", $executable);
 
       $output = `$cmd`;
       // or -> $output = shell_exec($cmd);
@@ -124,7 +122,13 @@ class Connector
   {
     $decodedToken = $this->parseJSON(base64_decode($token, true));
 
-    if ($decodedToken != null && $decodedToken["type"] === $type && $decodedToken["token"] === $this->token) {
+    if (
+      $decodedToken != null &&
+      isset($decodedToken["type"]) &&
+      $decodedToken["type"] === $type &&
+      isset($decodedToken["token"]) &&
+      $decodedToken["token"] === $this->token
+    ) {
       return $decodedToken;
     }
 

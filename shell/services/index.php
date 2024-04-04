@@ -1,6 +1,8 @@
 <?php
 
-require_once(getcwd() . "/lib/php/index.php");
+// require_once(dirname(dirname(__FILE__)) . "/lib/php/index.php");
+
+require_once "../lib/php/index.php";
 
 $connector = new Connector(
   getcwd(),
