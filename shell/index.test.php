@@ -25,3 +25,13 @@ $nodejs_res_2 = $connector->connectToService($languageTypes["NODEJS"], "/index.j
 
 echo json_encode($nodejs_res_2);
 echo "\n";
+
+$py_res = $connector->connectToService($languageTypes["PYTHON"], "/index.py", "form-validation", ["email" => "marufmunna800@gmail.com"], "python $?");
+
+echo json_encode($py_res);
+echo "\n";
+
+$py_res_2 = $connector->connectToService($languageTypes["PYTHON"], "/index.py", "form-validation-2", null, "python $?");
+
+echo json_encode($py_res_2);
+echo "\n";
