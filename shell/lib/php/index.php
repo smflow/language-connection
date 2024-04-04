@@ -6,6 +6,11 @@ $languageTypes = [
   "PYTHON" => "PYTHON-lang"
 ];
 
+$path_types = [
+  "relative" => "Relative",
+  "absolute" => "Absolute",
+];
+
 function path_join(array $paths)
 {
   return implode("", $paths);
@@ -21,6 +26,17 @@ class Connector
     $this->cwd = $servicesDir;
     $this->token = $token;
   }
+
+  public static function getPath(string $path_type, $args)
+  {
+    global $path_types;
+    if ($path_type === $path_types["relative"]) {
+      return implode("", [dirname(realpath($args["file"])), ...$args["paths"]]);
+    } else if ($path_type === $path_types["absolute"]) {
+      return implode(DIRECTORY_SEPARATOR, $args);
+    } else throw new Exception("Path type is invalid");
+  }
+
   protected function getLang($lang)
   {
     global $languageTypes;

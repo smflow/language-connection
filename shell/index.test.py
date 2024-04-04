@@ -1,9 +1,9 @@
-import os
-from os.path import dirname, abspath
+from lib.python.main import Connector, language_types, path_types
 
-from lib.python.main import Connector, language_types
-
-path = abspath(dirname(abspath(__file__)) + "/services")
+path = Connector.getPath(path_types["relative"], {
+  "paths": ["/services"],
+  "file": __file__
+})
 
 connector = Connector(
   path,

@@ -7,12 +7,25 @@ export const languageTypes = {
   PYTHON: "PYTHON-lang"
 };
 
+export const pathTypes = { "relative": "relative", "absolute": "absolute" };
+
 export class Connector {
   #cwd;
   #token;
   constructor(servicesDir, token) {
     this.#cwd = servicesDir;
     this.#token = token;
+  }
+  static getPath(pathType, args) {
+    if (pathType === pathTypes.relative) {
+      const currentFilePath = new URL(args.file).pathname;
+      const currentFolder = path.dirname(currentFilePath);
+      const servicesFolderPath = path.join(currentFolder, ...(args.paths || []));
+      const $path = path.resolve(servicesFolderPath);
+      return $path;
+    } else if (pathType === pathTypes.absolute) {
+      return path.join.apply(null, args);
+    } else throw new Error("Path type is invalid");
   }
   getLang(lang) {
     if (Object.values(languageTypes).find(l => l === lang) == null) { throw new Error("Unsupported language"); };

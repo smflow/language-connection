@@ -9,10 +9,24 @@ language_types = {
     'PYTHON': 'PYTHON-lang'
 }
 
+path_types = {
+  "relative":"relative",
+  "absolute":"absolute"
+}
+
 class Connector():
   def __init__(self, servicesDir, token) -> None:
     self.cwd = servicesDir
     self.token = token
+
+  @staticmethod
+  def getPath(pathType, args):
+    if pathType == path_types["relative"]:
+      return os.path.abspath(os.path.dirname(os.path.abspath(args["file"])) + "".join(args.get("paths", [])));
+    elif pathType == path_types["absolute"]:
+      return os.path.abspath("".join(args or []));
+    else:
+      raise ValueError("Path type is invalid");
 
   def get_lang(self, lang: str):
     if lang not in language_types.values():

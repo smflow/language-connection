@@ -1,10 +1,9 @@
-import { dirname, join, resolve } from 'path';
-import { Connector, languageTypes } from "./lib/node/index.js";
+import { Connector, languageTypes, pathTypes } from "./lib/node/index.js";
 
-const currentFilePath = new URL(import.meta.url).pathname;
-const currentFolder = dirname(currentFilePath);
-const servicesFolderPath = join(currentFolder, 'services');
-const path = resolve(servicesFolderPath);
+const path = Connector.getPath(pathTypes.relative, {
+  paths: ["/services"],
+  file: import.meta.url
+});
 
 const connector = new Connector(
   path,

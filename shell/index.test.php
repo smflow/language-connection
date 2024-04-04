@@ -2,7 +2,10 @@
 
 require_once implode("", [dirname(__FILE__), "/lib/php/index.php"]);
 
-$path = implode("", [dirname(realpath(__FILE__)), "/services"]);
+$path = Connector::getPath($path_types["relative"], [
+  "paths" => ["/services"],
+  "file" => __FILE__
+]);
 
 $connector = new Connector($path, "random-token-1209128");
 
