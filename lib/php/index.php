@@ -3,7 +3,8 @@
 $languageTypes = [
   "PHP" => "PHP-lang",
   "NODEJS" => "NODEJS-lang",
-  "PYTHON" => "PYTHON-lang"
+  "PYTHON" => "PYTHON-lang",
+  "RUBY" => "RUBY-lang"
 ];
 
 function path_join(array $paths)
@@ -95,6 +96,9 @@ class Connector
         case $languageTypes["PYTHON"]:
           $executable = $command ?? "python $?";
           break;
+        case $languageTypes["RUBY"]:
+          $executable = $command ?? "ruby $?";
+          break;
       }
 
       $_path = dirname(implode("", [
@@ -178,9 +182,15 @@ class Connector
         'token' => $this->token,
         'data' => call_user_func($cb, $decodedToken["data"] ?? null),
         'type' => $type,
+        'error' => null
       ]);
     } catch (\Exception $error) {
-      echo $error->getMessage();
+      echo json_encode([
+        'token' => $this->token,
+        'data' => null,
+        'type' => $type,
+        'error' => $error->getMessage() ?? "Something went wrong"
+      ]);
     }
   }
 }

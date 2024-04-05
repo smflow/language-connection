@@ -35,3 +35,13 @@ $py_res_2 = $connector->connectToService($languageTypes["PYTHON"], "/python/inde
 
 echo json_encode($py_res_2);
 echo "\n";
+
+$rb_res = $connector->connectToService($languageTypes["RUBY"], "/ruby/index.rb", "form-validation", ["email" => "marufmunna800@gmail.com"], "ruby $?");
+
+echo json_encode($rb_res);
+echo "\n";
+
+$rb_res_2 = $connector->connectToService($languageTypes["RUBY"], "/ruby/index.rb", "form-validation-2", null, "ruby $?");
+
+echo json_encode($rb_res_2);
+echo "\n";

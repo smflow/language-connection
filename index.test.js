@@ -59,3 +59,19 @@ connector.connectToService({
   command: "python $?"
 })
   .then((data) => console.log(data));
+
+connector.connectToService({
+  langType: languageTypes.RUBY,
+  programPath: "/ruby/index.rb",
+  type: "form-validation",
+  data: { email: "marufmunna800@gmail.com" },
+})
+  .then((data) => console.log(data));
+
+connector.connectToService({
+  langType: languageTypes.RUBY,
+  programPath: "/ruby/index.rb",
+  type: "form-validation-2",
+  data: null,
+})
+  .then((data) => console.log(data));

@@ -6,7 +6,8 @@ import subprocess
 language_types = {
     'PHP': 'PHP-lang',
     'NODEJS': 'NODEJS-lang',
-    'PYTHON': 'PYTHON-lang'
+    'PYTHON': 'PYTHON-lang',
+    'RUBY': 'RUBY-lang'
 }
 
 class Connector():
@@ -69,6 +70,8 @@ class Connector():
           executable = command or "node $?"
       elif lang_type == language_types["PYTHON"]:
           executable = command or "python $?"
+      elif lang_type == language_types["RUBY"]:
+          executable = command or "ruby $?"
 
       cmd = str(executable).replace("$?", os.path.abspath(self.cwd+ program_path) + f" {token}")
 

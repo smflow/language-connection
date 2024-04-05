@@ -41,5 +41,8 @@
   },
   "[java]": {
     "editor.defaultFormatter": "redhat.java"
+  },
+  "[ruby]": {
+    "editor.defaultFormatter": "Shopify.ruby-lsp"
   }
 }

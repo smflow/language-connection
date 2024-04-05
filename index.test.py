@@ -30,3 +30,11 @@ print(res_5)
 res_6 = connector.connect_to_service(language_types["PYTHON"], "/python/index.py", "form-validation-2", None, "python $?")
 
 print(res_6)
+
+res_7 = connector.connect_to_service(language_types["RUBY"], "/ruby/index.rb", "form-validation", {"email":"marufmunna800@gmail.com"})
+
+print(res_7)
+
+res_8 = connector.connect_to_service(language_types["RUBY"], "/ruby/index.rb", "form-validation-2", None)
+
+print(res_8)
