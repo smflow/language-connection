@@ -2,7 +2,8 @@ import sys
 from os.path import dirname, abspath
 from os import getcwd
 SCRIPT_DIR = dirname(abspath(__file__))
-sys.path.append(dirname(SCRIPT_DIR))
+ROOT_DIR = dirname(dirname(SCRIPT_DIR))
+sys.path.append(ROOT_DIR)
 from lib.python.main import Connector
 
 def main():

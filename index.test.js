@@ -1,9 +1,5 @@
-import { Connector, languageTypes, pathTypes } from "./lib/node/index.js";
-
-const path = Connector.getPath(pathTypes.relative, {
-  paths: ["/services"],
-  file: import.meta.url
-});
+import { Connector, languageTypes } from "./lib/node/index.js";
+const path = Connector.getPath("./services", import.meta.url);
 
 const connector = new Connector(
   path,
@@ -12,7 +8,7 @@ const connector = new Connector(
 
 connector.connectToService({
   langType: languageTypes.PHP,
-  programPath: "/index.php",
+  programPath: "/php/index.php",
   type: "form-validation",
   data: { email: "marufmunna800@gmail.com" },
   command: "php $?"
@@ -21,7 +17,7 @@ connector.connectToService({
 
 connector.connectToService({
   langType: languageTypes.PHP,
-  programPath: "/index.php",
+  programPath: "/php/index.php",
   type: "form-validation-2",
   data: null,
   command: "php $?"
@@ -30,7 +26,7 @@ connector.connectToService({
 
 connector.connectToService({
   langType: languageTypes.NODEJS,
-  programPath: "/index.js",
+  programPath: "/js/index.js",
   type: "form-validation",
   data: { email: "marufmunna800@gmail.com" },
   command: "node $?"
@@ -39,7 +35,7 @@ connector.connectToService({
 
 connector.connectToService({
   langType: languageTypes.NODEJS,
-  programPath: "/index.js",
+  programPath: "/js/index.js",
   type: "form-validation-2",
   data: null,
   command: "node $?"
@@ -48,7 +44,7 @@ connector.connectToService({
 
 connector.connectToService({
   langType: languageTypes.PYTHON,
-  programPath: "/index.py",
+  programPath: "/python/index.py",
   type: "form-validation",
   data: { email: "marufmunna800@gmail.com" },
   command: "python $?"
@@ -57,7 +53,7 @@ connector.connectToService({
 
 connector.connectToService({
   langType: languageTypes.PYTHON,
-  programPath: "/index.py",
+  programPath: "/python/index.py",
   type: "form-validation-2",
   data: null,
   command: "python $?"

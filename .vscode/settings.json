@@ -38,5 +38,8 @@
   "typescript.format.semicolons": "insert",
   "[php]": {
     "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+  },
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java"
   }
 }

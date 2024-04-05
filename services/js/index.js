@@ -1,4 +1,4 @@
-import { Connector } from "../lib/node/index.js";
+import { Connector } from "../../lib/node/index.js";
 
 const connector = new Connector(
   process.cwd(),

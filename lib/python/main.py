@@ -9,24 +9,24 @@ language_types = {
     'PYTHON': 'PYTHON-lang'
 }
 
-path_types = {
-  "relative":"relative",
-  "absolute":"absolute"
-}
-
 class Connector():
   def __init__(self, servicesDir, token) -> None:
     self.cwd = servicesDir
     self.token = token
 
   @staticmethod
-  def getPath(pathType, args):
-    if pathType == path_types["relative"]:
-      return os.path.abspath(os.path.dirname(os.path.abspath(args["file"])) + "".join(args.get("paths", [])));
-    elif pathType == path_types["absolute"]:
-      return os.path.abspath("".join(args or []));
-    else:
-      raise ValueError("Path type is invalid");
+  def get_path(_path, file) -> str:
+    s = str(_path)
+    real_path = os.path.dirname(os.path.abspath(file))
+
+    while s.startswith("../") or s.startswith("./"):
+        if s.startswith("../"):
+            s = s[3:]
+            real_path = os.path.dirname(real_path)
+        elif s.startswith("./"):
+            s = s[2:]
+
+    return os.path.abspath(os.path.join(real_path, s))
 
   def get_lang(self, lang: str):
     if lang not in language_types.values():
@@ -72,7 +72,8 @@ class Connector():
 
       cmd = str(executable).replace("$?", os.path.abspath(self.cwd+ program_path) + f" {token}")
 
-      output = subprocess.run(cmd, shell=True, capture_output=True, text=True,cwd=self.cwd)
+      _path = os.path.dirname(os.path.abspath("".join([self.cwd, program_path])))
+      output = subprocess.run(cmd, shell=True, capture_output=True, text=True,cwd=_path)
 
       if output.returncode == 0:
         res_data = None
@@ -84,8 +85,6 @@ class Connector():
             res_error = parsed.get("error", None)
         else:
           res_data = None
-          res_error = None
-          
           res_error = output.stdout or output.stderr or "Invalid data sent"
 
         return {
@@ -140,6 +139,6 @@ class Connector():
       print(json.dumps({
         "token": self.token,
         "data": None,
-        "error": str(error),
+        "error": str(error or "Something want wrong"),
         "type": type
       }), end="")

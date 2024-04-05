@@ -6,11 +6,6 @@ $languageTypes = [
   "PYTHON" => "PYTHON-lang"
 ];
 
-$path_types = [
-  "relative" => "Relative",
-  "absolute" => "Absolute",
-];
-
 function path_join(array $paths)
 {
   return implode("", $paths);
@@ -27,14 +22,24 @@ class Connector
     $this->token = $token;
   }
 
-  public static function getPath(string $path_type, $args)
+  public static function getPath($_path, $file)
   {
-    global $path_types;
-    if ($path_type === $path_types["relative"]) {
-      return implode("", [dirname(realpath($args["file"])), ...$args["paths"]]);
-    } else if ($path_type === $path_types["absolute"]) {
-      return implode(DIRECTORY_SEPARATOR, $args);
-    } else throw new Exception("Path type is invalid");
+    $s = $_path;
+    $realPath = dirname(parse_url($file, PHP_URL_PATH));
+
+    while (strpos($s, "../") === 0 || strpos($s, "./") === 0 || strpos($s, "/") === 0) {
+
+      if (strpos($s, "../") === 0) {
+        $s = substr($s, 3);
+        $realPath = dirname($realPath);
+      } else if (strpos($s, "./") === 0) {
+        $s = substr($s, 2);
+      } else if (strpos($s, "/") === 0) {
+        $s = substr($s, 1);
+      }
+    }
+
+    return implode(DIRECTORY_SEPARATOR, [$realPath, $s]);
   }
 
   protected function getLang($lang)
@@ -92,7 +97,11 @@ class Connector
           break;
       }
 
-      $cmd = "cd $this->cwd && " . str_replace("$?", path_join([$this->cwd, $programPath]) . " $token", $executable);
+      $_path = dirname(implode("", [
+        $this->cwd,
+        $programPath
+      ]));
+      $cmd = "cd $_path && " . str_replace("$?", path_join([$this->cwd, $programPath]) . " $token", $executable);
 
       $output = `$cmd`;
       // or -> $output = shell_exec($cmd);
@@ -105,7 +114,7 @@ class Connector
         $res_data = isset($parsed["data"]) ? $parsed["data"] : null;
         $res_error = isset($parsed["error"]) ? $parsed["error"] : null;
       } else {
-        $res_error = $output ?? "Command execution failed.";
+        $res_error = $output != '' || $output != null ? $output : "Command execution failed.";
       }
 
       return [
