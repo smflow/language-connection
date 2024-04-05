@@ -16,6 +16,10 @@ class Connector
     @token = token
   end
 
+  def self.get_service_token(arg)
+    return arg&.gsub(/^--token=/, '')
+  end
+
   def self.get_path(_path, file)
     s = _path.to_s
     pn = ::Pathname.new(file)

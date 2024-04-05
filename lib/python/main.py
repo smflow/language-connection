@@ -16,6 +16,19 @@ class Connector():
     self.token = token
 
   @staticmethod
+  def get_service_token(argv):
+    token=None
+    if argv is None:
+      return None
+    else:
+      try:
+        if argv[1]:
+          token = argv[1].replace("--token=", "")
+      except IndexError as _:
+        return None
+    return token
+
+  @staticmethod
   def get_path(_path, file) -> str:
     s = str(_path)
     real_path = os.path.dirname(os.path.abspath(file))

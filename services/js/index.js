@@ -5,7 +5,7 @@ const connector = new Connector(
   "random-token-1209128" // exact
 );
 
-const token = process.argv[2]?.replace("--token=", "");
+const token = Connector.getServiceToken(process.argv[2]);
 connector.createService("form-validation", token, function (data) {
   return Promise.resolve(["Test-1"]);
 });

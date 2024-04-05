@@ -2,7 +2,8 @@ require "../../lib/ruby/index.rb";
 
 connector = Connector.new(Dir.pwd, "random-token-1209128")
 
-token = ARGV[0]&.gsub(/^--token=/, '')
+token = Connector.get_service_token(ARGV[0])
+
 if token
   cb_1 = ->(data) {
     return {"imp":"data from ruby"}

@@ -7,7 +7,7 @@ $connector = new Connector(
   "random-token-1209128" // exact
 );
 
-$token = isset($argv[1]) ? str_replace("--token=", "", $argv[1]) : null;
+$token = Connector::getServiceToken($argv[1]);
 
 $connector->createService("form-validation", $token, function ($data) {
   return [

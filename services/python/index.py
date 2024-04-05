@@ -7,15 +7,10 @@ sys.path.append(ROOT_DIR)
 from lib.python.main import Connector
 
 def main():
-  token=None
-  if sys.argv is None:
-    return None
-  else:
-    try:
-      if sys.argv[1]:
-        token = sys.argv[1].replace("--token=", "")
-    except IndexError as _:
-      return
+  token = Connector.get_service_token(sys.argv)
+
+  if token == None:
+    return
 
   connector = Connector(getcwd(), "random-token-1209128")
 

@@ -23,6 +23,13 @@ class Connector
     $this->token = $token;
   }
 
+  public static function getServiceToken(string $arg)
+  {
+    $t = isset($arg) ? str_replace("--token=", "", $arg) : null;
+
+    return $t;
+  }
+
   public static function getPath($_path, $file)
   {
     $s = $_path;
