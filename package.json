@@ -8,10 +8,10 @@
     "lib": "lib"
   },
   "scripts": {
-    "test:php": "npx nodemon --ext php,js,py,rb --exec php index.test.php",
-    "test:node": "npx nodemon --ext php,js,py,rb --exec node index.test.js",
-    "test:python": "npx nodemon --ext php,js,py,rb --exec python index.test.py",
-    "test:ruby": "npx nodemon --ext php,js,py,rb --exec ruby index.test.rb"
+    "test:php": "npx nodemon --ext php,js,py,rb --exec php ./test/php/index.test.php",
+    "test:node": "npx nodemon --ext php,js,py,rb --exec node ./test/node/index.test.js",
+    "test:python": "npx nodemon --ext php,js,py,rb --exec python ./test/python/index.test.py",
+    "test:ruby": "npx nodemon --ext php,js,py,rb --exec ruby ./test/ruby/index.test.rb"
   },
   "repository": {
     "type": "git",

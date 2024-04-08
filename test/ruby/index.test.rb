@@ -1,6 +1,11 @@
-require "./lib/ruby/index.rb"
+require "pathname";
+pn = ::Pathname.new(File.expand_path(__FILE__))
+dir = pn.dirname
+dir = dir.dirname
+dir = dir.dirname
+require dir + "lib/ruby/index.rb"
 
-path = Connector.get_path("/services", File.expand_path(__FILE__))
+path = Connector.get_path("../../services", File.expand_path(__FILE__))
 
 connector = Connector.new(path, "random-token-1209128")
 

@@ -1,8 +1,12 @@
 <?php
+function d(string $path)
+{
+  return dirname($path);
+}
 
-require_once implode("", [dirname(__FILE__), "/lib/php/index.php"]);
+require_once implode("", [d(d(d(__FILE__))), "/lib/php/index.php"]);
 
-$path = Connector::getPath("./services", __FILE__);
+$path = Connector::getPath("../../services", __FILE__);
 
 $connector = new Connector($path, "random-token-1209128");
 

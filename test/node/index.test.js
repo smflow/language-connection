@@ -1,5 +1,5 @@
-import { Connector, languageTypes } from "./lib/node/index.js";
-const path = Connector.getPath("./services", import.meta.url);
+import { Connector, languageTypes } from "../../lib/node/index.js";
+const path = Connector.getPath("../../services", import.meta.url);
 
 const connector = new Connector(
   path,

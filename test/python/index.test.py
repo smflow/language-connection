@@ -1,6 +1,12 @@
+from os.path import dirname, abspath
+import sys
+d = dirname
+SCRIPT_DIR = d(abspath(__file__))
+ROOT_DIR = d(d(SCRIPT_DIR))
+sys.path.append(ROOT_DIR)
 from lib.python.main import Connector, language_types
 
-path = Connector.get_path("./services", __file__)
+path = Connector.get_path("../../services", __file__)
 
 connector = Connector(
   path,

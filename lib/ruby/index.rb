@@ -80,24 +80,27 @@ class Connector
     end
 
     response = if status&.success?
-      validate_res(stdout, type) && (stderr == nil || stderr == '') ? {
+      validate_res(stdout, type) && (stderr == nil || stderr == '') ? cvt_json_2({
         data: parse_json(stdout)["data"] || nil,
         error: parse_json(stdout)["error"] || nil
-      } : {
+      }) : cvt_json_2({
         error: stdout || stderr || 'Invalid data sent',
         data: nil
-      }
+      })
     else
-      {
+      cvt_json_2({
         data: nil,
         error: 'Command execution failed.'
-      }
+      })
     end
 
 
     puts response
   end
 
+  def cvt_json_2(data)
+    return parse_json(data.to_json)
+  end
 
   def generate_token(token, type, data=nil)
     encoded_data = Base64.strict_encode64({ data: data, type: type, token: token }.to_json)
